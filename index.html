@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>32KB/64KB Honda ROM Viewer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="drop-zone">
+            <p>Drag & Drop your 32KB/64KB .bin/.rom file here</p>
+            <p>or</p>
+            <input type="file" id="file-input" style="display: none;" accept=".bin,.rom">
+            <button onclick="document.getElementById('file-input').click()">Select File</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script src="rom-definition.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

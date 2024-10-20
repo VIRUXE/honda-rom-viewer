@@ -1,0 +1,72 @@
+{
+	"injector_test_bypass": {
+		"bypass_1": { "address": "0652", "bytes": 3, "description": "Injector test bypass #1", "notes": "Change to J label_065F (03 5F 06)" },
+		"bypass_2": { "address": "1580", "bytes": 3, "description": "Injector test bypass #2", "notes": "Change to J label_159A (03 9A 15)" }
+	},
+
+	"vtp_vts_error_bypass": {
+		"bypass_1": { "address": "11B6", "bytes": 1, "description": "VTP/VTS error bypass", "notes": "Change to 30" },
+		"bypass_2": { "address": "3D06", "bytes": 2, "description": "VTP/VTS error bypass", "notes": "Change to CB1C" },
+		"bypass_3": { "address": "3D27", "bytes": 2, "description": "VTP/VTS error bypass", "notes": "Change to CB16" }
+	},
+
+	"vtec": {
+		"enable"            : { "address": "6001", "bytes": 1, "description": "VTEC enable", "notes": "0xFF enables, 0x00 disables" },
+		"crossover_1"       : { "address": "6432", "bytes": 2, "description": "VTEC point #1", "notes": "VTEC crossover RPM #1. First is Reset, Second is Set (The actual RPM it activates for the first time).", "bit": 8, "scalingFactor": 28.64390243902439 },
+		"crossover_2"       : { "address": "6434", "bytes": 2, "description": "VTEC point #2", "notes": "VTEC crossover RPM #2", "bit": 8, "scalingFactor": 28.64390243902439 },
+		"crossover_3"       : { "address": "6436", "bytes": 2, "description": "VTEC point #3", "notes": "VTEC crossover RPM #3", "bit": 8, "scalingFactor": 28.64390243902439 },
+		"crossover_4"       : { "address": "6438", "bytes": 2, "description": "VTEC point #4", "notes": "VTEC crossover RPM #4", "bit": 8, "scalingFactor": 28.64390243902439 },
+		"coolant_temp_check": { "address": "11CA", "bytes": 1, "description": "VTEC coolant temp check", "notes": "(0x44 enables, 0xFF disables)" },
+		"vss_check"         : { "address": "6010", "bytes": 1, "description": "VTEC VSS check", "notes": "0x00 enables, 0xFF disables" }
+	},
+
+	"speed_limit": {
+		"value"       : { "address": "1831", "bytes": 1, "description": "Speed limiter value", "notes": "B9 is 185 km/h (115 mph); FE is 254 km/h (158 mph). 1:1 ratio." },
+		"jump_routine": { "address": "1832", "bytes": 2, "description": "Speed limiter jump routine", "notes": "Change from JGE label_something (CD 0A) to two NOPs (00 00) to disable speed limiter" },
+		"normal_mode" : { "address": "600B", "bytes": 1, "description": "Speed limiter - normal mode", "notes": "0x00 enables, 0xFF disables" },
+		"debug_mode"  : { "address": "6013", "bytes": 1, "description": "Speed limiter setting for debug mode", "notes": "0x00 disables, 0xFF enables" }
+	},
+
+	"o2": {
+		"sensor"        : { "address": "6005", "bytes": 1, "description": "Oxygen sensor", "notes": "0xFF enables, 0x00 disables" },
+		"disable"       : { "address": "208D", "bytes": 3, "description": "O2 heater disable (jump instruction?)", "notes": "Change to J label_20C7 (03 C7 20)" },
+		"heater_control": { "address": "6003", "bytes": 1, "description": "Oxygen heater sensor", "notes": "0xFF enables, 0x00 disables" }
+	},
+
+	"checksum_jump_instruction": { "address": "2855", "bytes": 2, "description": "Checksum jump instruction", "notes": "Change JEQ 2867 (C9 10) to SJ 2867 (CB 10) to disable checksum" },
+	"target_idle_rpm"          : { "address": "2B75", "bytes": 2, "description": "Target idle RPM", "notes": "This is a Little Endian 16bit RPM (untested)", "bit": 16, "scalingFactor": 28.64390243902439 },
+	"iac_jump_instruction"     : { "address": "3C6E", "bytes": 2, "description": "IAC jump instruction", "notes": "Change JEQ 3C71 (C9 01) to JEQ 3C70 (C9 00) to disable IAC error" },
+	"knock_sensor_enable"      : { "address": "6002", "bytes": 1, "description": "Knock sensor enable", "notes": "0xFF enables, 0x00 disables" },
+	"barometric_sensor_enable" : { "address": "6004", "bytes": 1, "description": "Barometric sensor enable", "notes": "0xFF enables, 0x00 disables" },
+	"injector_test"            : { "address": "6006", "bytes": 1, "description": "Injector test", "notes": "0xFF disables, 0x00 enables" },
+	"egr_system"               : { "address": "6009", "bytes": 1, "description": "EGR system", "notes": "0xFF enables, 0x00 disables" },
+	"debug_test_mode"          : { "address": "6011", "bytes": 1, "description": "Debug/Test mode", "notes": "0xFF enables, 0x00 disables, has a lot of effects - more info hinted at here" },
+	"auto_manual_enable"       : { "address": "6012", "bytes": 2, "description": "Auto/Manual enable", "notes": "(No idea) Lots of good information in this thread needs to be deciphered here" },
+
+	"low_cam_rev_limit": {
+		"reset": { "address": "6375", "bytes": 2, "description": "Low cam rev limit reset", "notes": "16bit RPM format", "bit": 16, "scalingFactor": 28.64390243902439 },
+		"set"  : { "address": "637B", "bytes": 2, "description": "Low cam rev limit set", "notes": "", "scalingFactor": 28.64390243902439 }
+	},
+	"high_cam_rev_limit": {
+		"reset": { "address": "6381", "bytes": 2, "description": "High cam rev limit reset", "notes": "", "scalingFactor": 28.64390243902439 },
+		"set"  : { "address": "6387", "bytes": 2, "description": "High cam rev limit set", "notes": "", "scalingFactor": 28.64390243902439 }
+	},
+
+	"mbar_scale"                    : { "address": "7000", "bytes": 10,  "description": "mBar scale", "notes": "mBar scale row - 8bit MBar", "bit": 8 },
+	"low_cam_rpm_scale"             : { "address": "700A", "bytes": 20,  "description": "Low cam RPM scale", "notes": "Low cam RPM scale row - 8bit Low Cam RPM values", "bit": 8, "scalingFactor": 28.64390243902439 },
+	"high_rpm_scale"                : { "address": "701E", "bytes": 20,  "description": "High RPM scale", "notes": "High RPM scale row - 8bit High Cam RPM values", "bit": 8, "scalingFactor": 28.64390243902439 },
+	"low_cam_fuel_table"            : { "address": "7032", "bytes": 200, "description": "Low cam fuel table", "notes": "10 col x 20 row - 8bit Fuel 'v' values", "bit": 8 },
+	"low_cam_fuel_coefficient"      : { "address": "70FA", "bytes": 10,  "description": "Low cam fuel coefficient", "notes": "10 col x 1 row - 8bit Fuel 'm' values", "bit": 8 },
+	"high_cam_fuel_table"           : { "address": "7104", "bytes": 200, "description": "High cam fuel table", "notes": "10 col x 20 row" },
+	"high_cam_fuel_coefficient"     : { "address": "71CC", "bytes": 10,  "description": "High cam fuel coefficient", "notes": "10 col x 1 row" },
+	"extra_fuel_table_limp_mode"    : { "address": "71D6", "bytes": 100, "description": "Extra fuel table LIMP MODE", "notes": "10 col x 10 row" },
+	"extra_fuel_coefficient"        : { "address": "7244", "bytes": 10,  "description": "Extra fuel coefficient", "notes": "10 col x 1 row" },
+	"low_cam_ignition_table"        : { "address": "724E", "bytes": 200, "description": "Low cam ignition table", "notes": "10 col x 20 row - 8bit Advance values", "bit": 8 },
+	"high_cam_ignition_table"       : { "address": "7316", "bytes": 200, "description": "High cam ignition table", "notes": "10 col x 20 row" },
+	"extra_ignition_table_limp_mode": { "address": "73DE", "bytes": 100, "description": "Extra ignition table LIMP MODE", "notes": "10 col x 10 row" },
+	"low_cam_table_closed_loop"     : { "address": "744C", "bytes": 200, "description": "Low cam table - CLOSED LOOP (target lambda)", "notes": "10 col x 20 row" },
+	"high_cam_table_closed_loop"    : { "address": "7514", "bytes": 200, "description": "High cam table - CLOSED LOOP (target lambda)", "notes": "10 col x 20 row" },
+	
+	"unknown_table" : { "address": "6988", "bytes": 47, "description": "Unknown table", "notes": "Has something to do with IACV pulse" },
+	"unknown_table1": { "address": "75DC", "bytes": 100, "description": "No idea, all 00s", "notes": "10 col x 10 row" }
+}
